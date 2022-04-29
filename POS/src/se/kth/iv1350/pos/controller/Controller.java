@@ -24,4 +24,11 @@ public class Controller {
         Sale sale = new Sale();
     }
 
+    /**
+     * Takes the item's EAN code from view.
+     * @param eanCode The item's unique identifier.
+     */
+    public void scanItem(int eanCode) {
+
+    }
 }
