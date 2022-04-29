@@ -7,12 +7,14 @@ import se.kth.iv1350.pos.view.View;
 
 /**
  * Contains the main method of the POS. Starts the whole application.
+ *
  * @author Adrian Jonsson Sjoedin
  */
 
 public class Main {
     /**
      * Main method used to start the application.
+     *
      * @param args Does not require any parameters or command line inputs.
      */
     public static void main(String[] args) {
@@ -20,5 +22,6 @@ public class Main {
         Printer printer = new Printer();
         Controller ctrl = new Controller(externalSystems, printer);
         View view = new View(ctrl, printer);
+        view.simulateOneSale();
     }
 }
