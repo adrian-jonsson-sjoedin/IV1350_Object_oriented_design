@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/IV1350_Objecct_oriented_design.iml" filepath="$PROJECT_DIR$/.idea/IV1350_Objecct_oriented_design.iml" />
+      <module fileurl="file://$PROJECT_DIR$/POS/POS.iml" filepath="$PROJECT_DIR$/POS/POS.iml" />
+    </modules>
+  </component>
+</project>
