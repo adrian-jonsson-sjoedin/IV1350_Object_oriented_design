@@ -1,10 +1,13 @@
 package se.kth.iv1350.pos.controller;
 
-import se.kth.iv1350.pos.integration.ExternalSystemsCreator;
-import se.kth.iv1350.pos.integration.Printer;
+import se.kth.iv1350.pos.integration.*;
 import se.kth.iv1350.pos.model.Sale;
 
 public class Controller {
+    private ExternalInventorySystem exInventorySystem;
+    private ExternalAccountingSystem exAccountingSystem;
+    private DiscountDatabase discountDB;
+    private Sale sale;
 
     /**
      * Creates an instance of the controller that is going to be used to access other layers. This is only done once.
@@ -13,7 +16,9 @@ public class Controller {
      * @param printer         The printer class that is going to be used to simulate printing a receipt.
      */
     public Controller(ExternalSystemsCreator externalSystems, Printer printer) {
-
+        this.exInventorySystem = externalSystems.getExInventorySystem();
+        this.exAccountingSystem = externalSystems.getExAccountingSystem();
+        this.discountDB = externalSystems.getDiscounts();
     }
 
     /**
@@ -25,10 +30,12 @@ public class Controller {
     }
 
     /**
-     * Takes the item's EAN code from view.
      * @param eanCode The item's unique identifier.
      */
-    public void scanItem(int eanCode) {
-
+    public void scanAndAddNewItem(int eanCode, int quantity) {
+        if (exInventorySystem.checkIfItemExists(eanCode)) {
+            sale.addItemToBasket(exInventorySystem.retrieveItem(eanCode), quantity);
+            
+        }
     }
 }

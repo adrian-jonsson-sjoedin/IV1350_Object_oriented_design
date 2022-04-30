@@ -6,6 +6,7 @@ import java.util.List;
 
 /**
  * Tha class that is handling the sale. Contains methods and fields necessary for one sale instance.
+ *
  * @author Adrian Jonsson Sjoedin.
  */
 public class Sale {
@@ -20,4 +21,7 @@ public class Sale {
     public Sale() {
     }
 
+    public void addItemToBasket(ItemDTO item, int quantity) {
+
+    }
 }

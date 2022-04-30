@@ -6,7 +6,7 @@ package se.kth.iv1350.pos.integration;
 public class ExternalSystemsCreator {
     private ExternalInventorySystem exInventorySystem = new ExternalInventorySystem();
     private ExternalAccountingSystem exAccountingSystem = new ExternalAccountingSystem();
-    private DiscountDatabase discounts = new DiscountDatabase();
+    private DiscountDatabase discountDB = new DiscountDatabase();
 
     /**
      * Retrieves ExternalInventorySystem
@@ -29,6 +29,6 @@ public class ExternalSystemsCreator {
      * @return The value of discounts
      */
     public DiscountDatabase getDiscounts() {
-        return discounts;
+        return discountDB;
     }
 }
