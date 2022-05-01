@@ -1,5 +1,6 @@
 package se.kth.iv1350.pos.integration;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -7,7 +8,7 @@ import java.util.List;
  * inventory that can not be extended.
  */
 public class ExternalInventorySystem {
-    private List<ItemDTO> inventory;
+    private List<ItemDTO> inventory = new ArrayList<>();
 
     /**
      * Package private constructor that creates the placeholder inventory.
