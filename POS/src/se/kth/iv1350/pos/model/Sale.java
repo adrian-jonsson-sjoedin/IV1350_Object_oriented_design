@@ -25,11 +25,43 @@ public class Sale {
     /**
      * This method adds the item and the specified quantity of said item to the basket.
      *
-     * @param item The item to be added to the basket
+     * @param item     The item to be added to the basket.
      * @param quantity How many of said item that should be added.
      */
     public void addItemToBasket(ItemDTO item, int quantity) {
-        basket.add(new ItemInBasket(item, quantity));
+        if (itemAlreadyScanned(item)) {
+            updateQuantityOfItemInBasket(item, quantity);
+        } else {
+            basket.add(new ItemInBasket(item, quantity));
+        }
     }
-    
+
+    /**
+     * Checks if an item is already added to the basket.
+     *
+     * @param item The item to check.
+     * @return True if item is already in basket, otherwise false.
+     */
+    private boolean itemAlreadyScanned(ItemDTO item) {
+        for (ItemInBasket itemInBasket : basket) {
+            if (itemInBasket.getItemEanCode() == item.getEanCode()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Updates the quantity of an item in the basket.
+     *
+     * @param item     The item that should be updated.
+     * @param quantity The quantity we should add to the item already in the basket.
+     */
+    private void updateQuantityOfItemInBasket(ItemDTO item, int quantity) {
+        for (ItemInBasket itemInBasket : basket) {
+            if (itemInBasket.getItemEanCode() == item.getEanCode()) {
+                itemInBasket.setQuantity(itemInBasket.getQuantity() + quantity);
+            }
+        }
+    }
 }
