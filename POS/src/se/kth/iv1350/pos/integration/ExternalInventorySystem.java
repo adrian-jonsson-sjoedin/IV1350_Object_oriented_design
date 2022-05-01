@@ -4,7 +4,7 @@ import java.util.List;
 
 /**
  * This class represents the external inventory system for the application. It currently only contains a hardcoded
- * inventory.
+ * inventory that can not be extended.
  */
 public class ExternalInventorySystem {
     private List<ItemDTO> inventory;

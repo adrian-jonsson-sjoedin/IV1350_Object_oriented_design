@@ -30,12 +30,16 @@ public class Controller {
     }
 
     /**
+     * Uses the item's identifier to find and retrieve the item from the external inventory system and add it
+     * to the sale.
+     *
      * @param eanCode The item's unique identifier.
+     * @param quantity How many of this item that should be added.
      */
-    public void scanAndAddNewItem(int eanCode, int quantity) {
+    public void scanAndAddNewItemFromInventoryToSale(int eanCode, int quantity) {
         if (exInventorySystem.checkIfItemExists(eanCode)) {
             sale.addItemToBasket(exInventorySystem.retrieveItem(eanCode), quantity);
-            
+
         }
     }
 }
