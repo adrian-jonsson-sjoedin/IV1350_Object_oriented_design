@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
  * This class tests that the ExternalInventorySystem class works as intended.
  */
 class ExternalInventorySystemTest {
-    ExternalInventorySystem inventory;
+  private  ExternalInventorySystem inventory;
 
 
     @BeforeEach

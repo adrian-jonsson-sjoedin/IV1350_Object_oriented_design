@@ -22,6 +22,10 @@ public class Sale {
     public Sale() {
     }
 
+    public List<ItemInBasket> getBasket() {
+        return basket;
+    }
+
     /**
      * This method adds the item and the specified quantity of said item to the basket.
      *

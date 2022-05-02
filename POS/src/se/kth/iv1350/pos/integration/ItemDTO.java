@@ -16,7 +16,7 @@ public class ItemDTO {
      * @param itemPrice The price for the item.
      * @param vatRate The items VAT rate.
      */
-    ItemDTO(String itemName, int eanCode, double itemPrice, double vatRate) {
+  public ItemDTO(String itemName, int eanCode, double itemPrice, double vatRate) {
         this.itemName = itemName;
         this.eanCode = eanCode;
         this.itemPrice = itemPrice;
