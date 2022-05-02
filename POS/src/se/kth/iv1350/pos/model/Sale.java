@@ -72,7 +72,7 @@ public class Sale {
     private void updateRunningTotalPrice() {
         this.runningTotalPrice = 0;
         for (ItemInBasket itemInBasket : this.basket) {
-            this.runningTotalPrice += itemInBasket.getItemPrice();
+            this.runningTotalPrice += itemInBasket.getQuantity() * itemInBasket.getItemPrice();
         }
     }
 
@@ -82,7 +82,8 @@ public class Sale {
     private void updateTotalVat() {
         this.totalVatPrice = 0;
         for (ItemInBasket itemInBasket : this.basket) {
-            this.totalVatPrice += itemInBasket.getItemPrice() * (itemInBasket.getItemVatRate() / 100);
+            this.totalVatPrice += itemInBasket.getQuantity() *
+                    (itemInBasket.getItemPrice() * (itemInBasket.getItemVatRate() / 100));
         }
     }
 

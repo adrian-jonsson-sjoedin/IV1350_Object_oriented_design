@@ -31,8 +31,8 @@ class SaleTest {
 
     @Test
     public void testAddAlreadyExistingItemToBasket() {
-        sale.addItemToBasket(itemDummy, 1);
-        int expected = 2;
+        sale.addItemToBasket(itemDummy, 2);
+        int expected = 3;
         int actual = sale.getBasket().get(0).getQuantity();
         assertEquals(expected, actual, "Quantity did not update correctly");
     }
@@ -71,5 +71,34 @@ class SaleTest {
         double expected = 9999;
         double actual = sale.getBasket().get(0).getItemEanCode();
         assertEquals(expected, actual, "Item's EAN code matched");
+    }
+
+    @Test
+    public void testGetTotalPriceWithOneItemInBasket() {
+        double expected = 99.99 + 99.99 * ((double) 99 / 100);
+        double actual = sale.getTotalPrice();
+        assertEquals(expected, actual, "The basket's total price was not calculated correctly");
+    }
+
+    @Test
+    public void testGetTotalPrice() {
+        sale.addItemToBasket(anotherItemDummy, 1);
+        double expected = (99.99 + 99.99 * ((double) 99 / 100)) + (89.99 + 89.99 * ((double) 89 / 100));
+        double actual = sale.getTotalPrice();
+        assertEquals(expected, actual, "The total price when more than one item is in basket was calculated " +
+                "incorrectly");
+    }
+
+    @Test
+    public void testGetTotalPriceWhenOneItemHasQuantityGreaterThanOne() {
+        sale.addItemToBasket(anotherItemDummy, 5);
+        double expectedPriceFirstItem = 99.99;
+        double expectedPriceSecondItem = 5 * 89.99;
+        double expectedVatFirstItem = 99.99 * ((double) 99 / 100);
+        double expectedVatSecondItem = 5 * (89.99 * ((double) 89 / 100));
+        double expected = (expectedPriceFirstItem + expectedPriceSecondItem) + (expectedVatFirstItem + expectedVatSecondItem);
+        double actual = sale.getTotalPrice();
+        assertEquals(expected, actual, "The total price when one item in basket has a quantity greater than one" +
+                "was calculated incorrectly");
     }
 }
