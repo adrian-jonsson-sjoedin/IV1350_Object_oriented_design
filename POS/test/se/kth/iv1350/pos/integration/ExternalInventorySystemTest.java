@@ -53,4 +53,34 @@ class ExternalInventorySystemTest {
         String actualItemName = inventory.retrieveItem(6880).getItemName();
         assertNotEquals(expectedItemName, actualItemName, "Found item did match, which it shouldn't!");
     }
+
+    @Test
+    public void testRetrievedItemPriceMatches() {
+        double expectedItemPrice = 7.95;
+        double actualItemPrice = inventory.retrieveItem(6880).getItemPrice();
+        assertEquals(expectedItemPrice, actualItemPrice, "Found item prices does not match.");
+    }
+
+    @Test
+    public void testRetrievedItemPriceDoesNotMatch() {
+        double expectedItemPrice = 0;
+        double actualItemPrice = inventory.retrieveItem(6880).getItemPrice();
+        assertNotEquals(expectedItemPrice, actualItemPrice, "Found item's price matched, which" +
+                "they should not");
+    }
+
+    @Test
+    public void testRetrievedItemVatRateMatches() {
+        double expectedVatRate = 5;
+        double actualVatRate = inventory.retrieveItem(6880).getVatRate();
+        assertEquals(expectedVatRate, actualVatRate, "Item VAT rate did not match");
+    }
+
+    @Test
+    public void testRetrievedItemVatRateDoesNotMatch() {
+        double expectedVatRate = 0;
+        double actualVatRate = inventory.retrieveItem(6880).getVatRate();
+        assertNotEquals(expectedVatRate, actualVatRate, "Item VAT rate matched, which they shouldn't");
+
+    }
 }
