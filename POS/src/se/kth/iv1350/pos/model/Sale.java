@@ -6,24 +6,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Tha class that is handling the sale. Contains methods and fields necessary for one sale instance.
+ * The class that is handling the sale. Contains methods and fields necessary for one sale instance.
  *
  * @author Adrian Jonsson Sjoedin.
  */
 public class Sale {
-    private float runningTotalPrice;
-    private float totalVatPrice;
-    private float totalPrice;
+    private double runningTotalPrice;
+    private double totalVatPrice;
+    private double totalPrice;
     private List<ItemInBasket> basket = new ArrayList<>();
 
     /**
      * Creates an instance of sale.
      */
     public Sale() {
-    }
-
-    public List<ItemInBasket> getBasket() {
-        return basket;
     }
 
     /**
@@ -36,7 +32,7 @@ public class Sale {
         if (itemAlreadyScanned(item)) {
             updateQuantityOfItemInBasket(item, quantity);
         } else {
-            basket.add(new ItemInBasket(item, quantity));
+            this.basket.add(new ItemInBasket(item, quantity));
         }
     }
 
@@ -47,7 +43,7 @@ public class Sale {
      * @return True if item is already in basket, otherwise false.
      */
     private boolean itemAlreadyScanned(ItemDTO item) {
-        for (ItemInBasket itemInBasket : basket) {
+        for (ItemInBasket itemInBasket : this.basket) {
             if (itemInBasket.getItemEanCode() == item.getEanCode()) {
                 return true;
             }
@@ -62,10 +58,59 @@ public class Sale {
      * @param quantity The quantity we should add to the item already in the basket.
      */
     private void updateQuantityOfItemInBasket(ItemDTO item, int quantity) {
-        for (ItemInBasket itemInBasket : basket) {
+        for (ItemInBasket itemInBasket : this.basket) {
             if (itemInBasket.getItemEanCode() == item.getEanCode()) {
                 itemInBasket.setQuantity(itemInBasket.getQuantity() + quantity);
             }
         }
+    }
+
+    /**
+     * This method will update the field runningTotalPrice which is the price of all items in the basket without the
+     * VAT added
+     */
+    private void updateRunningTotalPrice() {
+        this.runningTotalPrice = 0;
+        for (ItemInBasket itemInBasket : this.basket) {
+            this.runningTotalPrice += itemInBasket.getItemPrice();
+        }
+    }
+
+    /**
+     * This method will update the total VAT that will be added to the sale
+     */
+    private void updateTotalVat() {
+        this.totalVatPrice = 0;
+        for (ItemInBasket itemInBasket : this.basket) {
+            this.totalVatPrice += itemInBasket.getItemPrice() * (itemInBasket.getItemVatRate() / 100);
+        }
+    }
+
+    /**
+     * This method calculates the total price of the sale
+     */
+    private void calculateTotalPrice() {
+        updateRunningTotalPrice();
+        updateTotalVat();
+        this.totalPrice = this.runningTotalPrice + this.totalVatPrice;
+    }
+
+    public double getRunningTotalPrice() {
+        updateRunningTotalPrice();
+        return runningTotalPrice;
+    }
+
+    public double getTotalVatPrice() {
+        updateTotalVat();
+        return totalVatPrice;
+    }
+
+    public double getTotalPrice() {
+        calculateTotalPrice();
+        return totalPrice;
+    }
+
+    public List<ItemInBasket> getBasket() {
+        return basket;
     }
 }

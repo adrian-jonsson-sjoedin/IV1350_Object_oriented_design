@@ -14,7 +14,7 @@ public class ItemDTO {
      * @param itemName Describes the item.
      * @param eanCode Unique identifier for the item.
      * @param itemPrice The price for the item.
-     * @param vatRate The items VAT rate.
+     * @param vatRate The items VAT rate. Is given in percentage.
      */
   public ItemDTO(String itemName, int eanCode, double itemPrice, double vatRate) {
         this.itemName = itemName;

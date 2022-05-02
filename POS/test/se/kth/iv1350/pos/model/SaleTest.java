@@ -34,40 +34,42 @@ class SaleTest {
         sale.addItemToBasket(itemDummy, 1);
         int expected = 2;
         int actual = sale.getBasket().get(0).getQuantity();
-        assertEquals(expected,actual, "Quantity did not update correctly");
+        assertEquals(expected, actual, "Quantity did not update correctly");
     }
+
     @Test
     public void testAddNewItem() {
-        sale.addItemToBasket(anotherItemDummy,1);
+        sale.addItemToBasket(anotherItemDummy, 1);
         int expectedBasketSize = 2;
         int actualBasketSize = sale.getBasket().size();
-        assertEquals(expectedBasketSize,actualBasketSize,"Item was not added to basket");
+        assertEquals(expectedBasketSize, actualBasketSize, "Item was not added to basket");
     }
+
     @Test
     public void testCanRetrieveItemName() {
-        String expected ="dummy";
+        String expected = "dummy";
         String actual = sale.getBasket().get(0).getItemName();
-        assertEquals(expected,actual,"Item name did not match");
+        assertEquals(expected, actual, "Item name did not match");
     }
 
     @Test
     public void testCanRetrieveItemPrice() {
         double expected = 99.99;
         double actual = sale.getBasket().get(0).getItemPrice();
-        assertEquals(expected,actual,"Item price did not match");
+        assertEquals(expected, actual, "Item price did not match");
     }
 
     @Test
     public void testCanRetrieveItemVatRate() {
         double expected = 99;
         double actual = sale.getBasket().get(0).getItemVatRate();
-        assertEquals(expected,actual,"Item VAT rate did not match");
+        assertEquals(expected, actual, "Item VAT rate did not match");
     }
 
     @Test
     public void testCanRetrieveItemEanCode() {
         double expected = 9999;
         double actual = sale.getBasket().get(0).getItemEanCode();
-        assertEquals(expected,actual,"Item's EAN code matched");
+        assertEquals(expected, actual, "Item's EAN code matched");
     }
 }
