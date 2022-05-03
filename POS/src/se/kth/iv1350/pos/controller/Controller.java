@@ -42,7 +42,9 @@ public class Controller {
     public void scanAndAddNewItemFromInventoryToSale(int eanCode, int quantity) {
         if (exInventorySystem.checkIfItemExists(eanCode)) {
             sale.addItemToBasket(exInventorySystem.retrieveItem(eanCode), quantity);
-
+        }else{
+            System.out.println();
+            System.out.println("Invalid EAN code: " + eanCode);
         }
     }
 
@@ -58,7 +60,7 @@ public class Controller {
         System.out.println("------------------------------------------------------");
         System.out.printf("Price: %-1.2f:-%n", sale.getRunningTotalPrice());
         System.out.printf("VAT: %-1.2f:-%n", sale.getTotalVatPrice());
-        System.out.printf("Total: %-1.2f:-%n", sale.getTotalPrice());
+       // System.out.printf("Total: %-1.2f:-%n", sale.getTotalPrice());
     }
 
 

@@ -29,12 +29,16 @@ public class View {
      */
     public void simulateOneSale() {
         ctrl.initializeNewSale();
-        System.out.println();
-        System.out.println("\t\t New sale started");
-        System.out.println("------------------------------------------------------");
         ctrl.scanAndAddNewItemFromInventoryToSale(3006,1);
         ctrl.scanAndAddNewItemFromInventoryToSale(6880, 3);
         ctrl.scanAndAddNewItemFromInventoryToSale(4680, 1);
+        ctrl.scanAndAddNewItemFromInventoryToSale(3006,1);
+        ctrl.scanAndAddNewItemFromInventoryToSale(2222,1);
+        ctrl.scanAndAddNewItemFromInventoryToSale(1111,5);
+        ctrl.scanAndAddNewItemFromInventoryToSale(94011, 1);
+        System.out.println();
+        System.out.println("\t\t New sale started");
+        System.out.println("------------------------------------------------------");
         ctrl.displayCurrentSaleInfo();
     }
 }

@@ -14,11 +14,11 @@ public class ExternalInventorySystem {
      * Package private constructor that creates the placeholder inventory.
      */
     ExternalInventorySystem() {
-        inventory.add(new ItemDTO("Apple, aroma", 3006, 5, 5));
-        inventory.add(new ItemDTO("Cinnamon bun", 6880, 7.95, 5));
-        inventory.add(new ItemDTO("Red paprika", 4680, 10.95, 5));
+        inventory.add(new ItemDTO("Apple, aroma", 3006, 5, 12));
+        inventory.add(new ItemDTO("Cinnamon bun", 6880, 7.95, 12));
+        inventory.add(new ItemDTO("Red paprika", 4680, 10.95, 12));
         inventory.add(new ItemDTO("Carlsberg 330ml", 1111, 11.95, 10));
-        inventory.add(new ItemDTO("Tampongs", 2222, 26.95, 2));
+        inventory.add(new ItemDTO("Tampongs", 2222, 26.95, 25));
     }
 
     /**
