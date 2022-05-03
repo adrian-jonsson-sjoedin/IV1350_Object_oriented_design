@@ -31,6 +31,10 @@ public class View {
         ctrl.initializeNewSale();
         System.out.println();
         System.out.println("\t\t New sale started");
+        System.out.println("------------------------------------------------------");
         ctrl.scanAndAddNewItemFromInventoryToSale(3006,1);
+        ctrl.scanAndAddNewItemFromInventoryToSale(6880, 3);
+        ctrl.scanAndAddNewItemFromInventoryToSale(4680, 1);
+        ctrl.displayCurrentSaleInfo();
     }
 }

@@ -20,6 +20,9 @@ public class Sale {
      * Creates an instance of sale.
      */
     public Sale() {
+        this.runningTotalPrice = 0;
+        this.totalVatPrice = 0;
+        this.totalPrice = 0;
     }
 
     /**

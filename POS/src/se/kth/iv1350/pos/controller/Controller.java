@@ -1,7 +1,10 @@
 package se.kth.iv1350.pos.controller;
 
 import se.kth.iv1350.pos.integration.*;
+import se.kth.iv1350.pos.model.ItemInBasket;
 import se.kth.iv1350.pos.model.Sale;
+
+import java.util.List;
 
 public class Controller {
     private ExternalInventorySystem exInventorySystem;
@@ -26,14 +29,14 @@ public class Controller {
      * during a sale.
      */
     public void initializeNewSale() {
-        Sale sale = new Sale();
+        this.sale = new Sale();
     }
 
     /**
      * Uses the item's identifier to find and retrieve the item from the external inventory system and add it
      * to the sale.
      *
-     * @param eanCode The item's unique identifier.
+     * @param eanCode  The item's unique identifier.
      * @param quantity How many of this item that should be added.
      */
     public void scanAndAddNewItemFromInventoryToSale(int eanCode, int quantity) {
@@ -42,4 +45,29 @@ public class Controller {
 
         }
     }
+
+    /**
+     * This method displays all relevant information about the current sale to
+     * the customer when called from view.
+     */
+    public void displayCurrentSaleInfo() {
+        List<ItemInBasket> currentBasket = sale.getBasket();
+        for (ItemInBasket itemInBasket : currentBasket) {
+            printString(itemInBasket);
+        }
+        System.out.println("------------------------------------------------------");
+        System.out.printf("Price: %-1.2f:-%n", sale.getRunningTotalPrice());
+        System.out.printf("VAT: %-1.2f:-%n", sale.getTotalVatPrice());
+        System.out.printf("Total: %-1.2f:-%n", sale.getTotalPrice());
+    }
+
+
+    private void printString(ItemInBasket item) {
+        String itemName = item.getItemName();
+        double itemPrice = item.getItemPrice();
+        int itemQuantity = item.getQuantity();
+        System.out.printf("%-20s %1d * %1.2f:- %n ", itemName, itemQuantity, itemPrice);
+        System.out.println();
+    }
+
 }
