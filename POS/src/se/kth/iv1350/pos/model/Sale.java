@@ -18,6 +18,7 @@ public class Sale {
     private Discount discount;
     private boolean discountApplied = false;
     private double totalDiscount;
+    private SaleDTO saleInfo;
 
     /**
      * Creates an instance of sale.
@@ -134,5 +135,16 @@ public class Sale {
 
     public List<ItemInBasket> getBasket() {
         return basket;
+    }
+
+    /**
+     *
+     * @param amountPaid What the customer paid
+     * @param change The change tey received
+     * @return
+     */
+    public SaleDTO endSale(double amountPaid, double change) {
+        saleInfo = new SaleDTO(this.basket, runningTotalPrice, totalVatPrice, totalPrice, amountPaid, change);
+        return saleInfo;
     }
 }

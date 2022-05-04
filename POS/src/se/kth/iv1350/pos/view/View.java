@@ -41,6 +41,9 @@ public class View {
         System.out.println("------------------------------------------------------");
         ctrl.displayCurrentSaleInfo();
         ctrl.addDiscount(9404075179L);
-        ctrl.displayCurrentSaleInfo();
+        ctrl.displayTotal();
+        ctrl.initializePaymentAndEndSale(200);
+        System.out.printf("Change is: %.2f:-%n", ctrl.getChange());
+        System.out.printf("The current balance left in the register is: %.2f:-", ctrl.getRegisterBalance());
     }
 }

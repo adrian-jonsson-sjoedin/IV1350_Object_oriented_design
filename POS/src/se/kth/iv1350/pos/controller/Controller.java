@@ -4,6 +4,7 @@ import se.kth.iv1350.pos.integration.*;
 import se.kth.iv1350.pos.model.ItemInBasket;
 import se.kth.iv1350.pos.model.Register;
 import se.kth.iv1350.pos.model.Sale;
+import se.kth.iv1350.pos.model.SaleDTO;
 
 import java.util.List;
 
@@ -13,6 +14,7 @@ public class Controller {
     private MemberDatabase memberDB;
     private Sale sale;
     private Register register;
+    private SaleDTO saleInfo;
 
     /**
      * Creates an instance of the controller that is going to be used to access other layers. This is only done once.
@@ -45,7 +47,7 @@ public class Controller {
     public void scanAndAddNewItemFromInventoryToSale(int eanCode, int quantity) {
         if (exInventorySystem.checkIfItemExists(eanCode)) {
             sale.addItemToBasket(exInventorySystem.retrieveItem(eanCode), quantity);
-        }else{
+        } else {
             System.out.println();
             System.out.println("Invalid EAN code: " + eanCode);
         }
@@ -63,9 +65,11 @@ public class Controller {
         System.out.println("------------------------------------------------------");
         System.out.printf("Price: %-1.2f:-%n", sale.getRunningTotalPrice());
         System.out.printf("VAT: %-1.2f:-%n", sale.getTotalVatPrice());
-        System.out.printf("Total: %-1.2f:-%n", sale.getTotalPrice());
     }
 
+    public void displayTotal() {
+        System.out.printf("Total: %-1.2f:-%n", sale.getTotalPrice());
+    }
 
     private void printToString(ItemInBasket item) {
         String itemName = item.getItemName();
@@ -75,12 +79,39 @@ public class Controller {
         System.out.println();
     }
 
+    /**
+     * Adds discount to purchase if customer is eligible.
+     *
+     * @param personalNr Identifier used  to check for eligibility.
+     */
     public void addDiscount(long personalNr) {
         if (memberDB.customerIsMember(2001011111L)) {
             sale.addDiscount();
             System.out.println(">>> Discount applied");
-        }else{
+        } else {
             System.out.println(">>> Customer is not a member");
         }
+    }
+
+    public void initializePaymentAndEndSale(double amountPaid) {
+        double change = register.registerPayment(amountPaid, sale.getTotalPrice());
+        saleInfo = sale.endSale(amountPaid, change);
+        updateExternalSystems(saleInfo);
+    }
+
+    private void updateExternalSystems(SaleDTO saleInfo) {
+        exAccountingSystem.updateSaleInAccountingSystem(saleInfo);
+    }
+
+    /**
+     * Getter to retrieve the change from SaleInfo
+     * @return the change for the customer
+     */
+    public double getChange() {
+        return saleInfo.getChange();
+    }
+
+    public double getRegisterBalance() {
+        return  register.getCurrentBalance();
     }
 }
