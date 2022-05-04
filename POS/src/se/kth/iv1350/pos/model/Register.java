@@ -19,22 +19,36 @@ public class Register {
         return currentBalance;
     }
 
+    /**
+     * Registers the payment for the customer.
+     *
+     * @param paidAmount The amount paid.
+     * @param totalPrice The total cost of the sale.
+     * @return The change the customer receives.
+     */
     public double registerPayment(double paidAmount, double totalPrice) {
-
+        double change = calculatedChange(paidAmount, totalPrice);
+        if (change == -1) {
+            System.out.println("Amount paid is to little");
+        } else {
+            this.currentBalance -= change;
+            this.currentBalance += paidAmount;
+        }
+        return  change;
     }
 
     /**
-     * Updates the amount in the register.
+     * Calculate how much change the customer should receive.
      *
-     * @param paidAmount the amount the customer paid.
+     * @param paidAmount The amount paid
+     * @param totalPrice The total cost of the sale
+     * @return Returns the change. If customer paid to little returns -1.
      */
-    private void updateBalance(double paidAmount) {
-
-    }
-
     private double calculatedChange(double paidAmount, double totalPrice) {
-        
-        return totalPrice - paidAmount;
+        double change = paidAmount - totalPrice;
+        if (change >= 0)
+            return paidAmount - totalPrice;
+        return -1;
     }
 
 }
