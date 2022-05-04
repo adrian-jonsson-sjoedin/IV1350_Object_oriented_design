@@ -71,7 +71,7 @@ class ExternalInventorySystemTest {
 
     @Test
     public void testRetrievedItemVatRateMatches() {
-        double expectedVatRate = 5;
+        double expectedVatRate = 12;
         double actualVatRate = inventory.retrieveItem(6880).getVatRate();
         assertEquals(expectedVatRate, actualVatRate, "Item VAT rate did not match");
     }

@@ -9,7 +9,7 @@ import java.util.List;
 public class Controller {
     private ExternalInventorySystem exInventorySystem;
     private ExternalAccountingSystem exAccountingSystem;
-    private DiscountDatabase discountDB;
+    private MemberDatabase membertDB;
     private Sale sale;
 
     /**
@@ -21,7 +21,7 @@ public class Controller {
     public Controller(ExternalSystemsCreator externalSystems, Printer printer) {
         this.exInventorySystem = externalSystems.getExInventorySystem();
         this.exAccountingSystem = externalSystems.getExAccountingSystem();
-        this.discountDB = externalSystems.getDiscounts();
+        this.membertDB = externalSystems.getMemberDB();
     }
 
     /**
