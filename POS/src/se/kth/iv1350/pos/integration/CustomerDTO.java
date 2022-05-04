@@ -5,13 +5,13 @@ package se.kth.iv1350.pos.integration;
  */
 public class CustomerDTO {
     private final String name;
-    private final int personalNr;
+    private final long personalNr;
 
     /**
      * @param name       Is the full name of the member
      * @param personalNr What is used to identify a customer
      */
-    public CustomerDTO(String name, int personalNr) {
+    public CustomerDTO(String name, long personalNr) {
         this.name = name;
         this.personalNr = personalNr;
     }
@@ -20,7 +20,7 @@ public class CustomerDTO {
         return name;
     }
 
-    public int getPersonalNr() {
+    public long getPersonalNr() {
         return personalNr;
     }
 }

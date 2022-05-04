@@ -15,6 +15,9 @@ public class Sale {
     private double totalVatPrice;
     private double totalPrice;
     private List<ItemInBasket> basket = new ArrayList<>();
+    private Discount discount;
+    private boolean discountApplied = false;
+    private double totalDiscount;
 
     /**
      * Creates an instance of sale.
@@ -68,7 +71,11 @@ public class Sale {
         }
     }
 
-    public void addDiscount(int personalNr) {
+    public void addDiscount(long personalNr) {
+        this.discountApplied = true;
+        this.discount = new Discount(this.basket);
+        this.totalDiscount = discount.buyThreeOrMoreGetOneFree() +
+                discount.buyForMoreThanOneHundred(this.runningTotalPrice);
 
     }
 
@@ -100,7 +107,11 @@ public class Sale {
     private void calculateTotalPrice() {
         updateRunningTotalPrice();
         updateTotalVat();
-        this.totalPrice = this.runningTotalPrice + this.totalVatPrice;
+        if (this.discountApplied) {
+            this.totalPrice = this.runningTotalPrice + this.totalVatPrice - this.totalDiscount;
+        }else{
+            this.totalPrice = this.runningTotalPrice + this.totalVatPrice;
+        }
     }
 
     public double getRunningTotalPrice() {

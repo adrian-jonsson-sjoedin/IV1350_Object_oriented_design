@@ -40,5 +40,7 @@ public class View {
         System.out.println("\t\t New sale started");
         System.out.println("------------------------------------------------------");
         ctrl.displayCurrentSaleInfo();
+        ctrl.addDiscount(9404075179L);
+        ctrl.displayCurrentSaleInfo();
     }
 }

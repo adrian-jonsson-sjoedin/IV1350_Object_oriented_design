@@ -14,7 +14,7 @@ public class MemberDatabase {
      * Package private constructor that creates the placeholder membership list.
      */
     MemberDatabase() {
-        members.add(new CustomerDTO("John Doe", 2001011111));
+        this.members.add(new CustomerDTO("John Doe", 2001011111));
     }
 
     /**
@@ -22,8 +22,8 @@ public class MemberDatabase {
      * @param personalNr The id that is used to identify a member.
      * @return True if they are a member, otherwise false.
      */
-    public boolean customerIsMember(int personalNr) {
-        for (CustomerDTO customer : members) {
+    public boolean customerIsMember(long personalNr) {
+        for (CustomerDTO customer : this.members) {
             if (customer.getPersonalNr() == personalNr) {
                 return true;
             }
@@ -32,6 +32,6 @@ public class MemberDatabase {
     }
 
     public List<CustomerDTO> getMembers() {
-        return members;
+        return this.members;
     }
 }

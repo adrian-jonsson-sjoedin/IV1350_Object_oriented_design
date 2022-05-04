@@ -60,7 +60,7 @@ public class Controller {
         System.out.println("------------------------------------------------------");
         System.out.printf("Price: %-1.2f:-%n", sale.getRunningTotalPrice());
         System.out.printf("VAT: %-1.2f:-%n", sale.getTotalVatPrice());
-       // System.out.printf("Total: %-1.2f:-%n", sale.getTotalPrice());
+        System.out.printf("Total: %-1.2f:-%n", sale.getTotalPrice());
     }
 
 
@@ -72,7 +72,7 @@ public class Controller {
         System.out.println();
     }
 
-    public void addDiscountToSale(int personalNr) {
-
+    public void addDiscount(long personalNr) {
+        sale.addDiscount(9404075179L);
     }
 }
