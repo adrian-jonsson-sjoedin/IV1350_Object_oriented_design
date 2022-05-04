@@ -2,7 +2,6 @@ package se.kth.iv1350.pos.model;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -11,7 +10,7 @@ import java.util.List;
 public class SaleDTO {
     private LocalTime timeOfSale = LocalTime.now();
     private LocalDate dateOfSale = LocalDate.now();
-    private List<ItemInBasket> basket = new ArrayList<>();
+    private List<ItemInBasket> basket;
     private double runningTotalPrice;
     private double totalVATPrice;
     private double totalPrice;

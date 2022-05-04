@@ -12,7 +12,7 @@ public class Register {
      * @param startingBalance The amount in the register at the start
      */
     public Register(double startingBalance) {
-        this.currentBalance = currentBalance;
+        this.currentBalance = startingBalance;
     }
 
     public double getCurrentBalance() {

@@ -118,6 +118,21 @@ public class Sale {
         }
     }
 
+
+    public List<ItemInBasket> getBasket() {
+        return basket;
+    }
+
+    /**
+     * @param amountPaid What the customer paid
+     * @param change     The change tey received
+     * @return
+     */
+    public SaleDTO endSale(double amountPaid, double change) {
+        this.saleInfo = new SaleDTO(this.basket, runningTotalPrice, totalVatPrice, totalPrice, amountPaid, change);
+        return saleInfo;
+    }
+
     public double getRunningTotalPrice() {
         updateRunningTotalPrice();
         return runningTotalPrice;
@@ -131,23 +146,5 @@ public class Sale {
     public double getTotalPrice() {
         calculateTotalPrice();
         return totalPrice;
-    }
-
-    public List<ItemInBasket> getBasket() {
-        return basket;
-    }
-
-    /**
-     *
-     * @param amountPaid What the customer paid
-     * @param change The change tey received
-     * @return
-     */
-    public SaleDTO endSale(double amountPaid, double change) {
-        this.saleInfo = new SaleDTO(this.basket, runningTotalPrice, totalVatPrice, totalPrice, amountPaid, change);
-        return saleInfo;
-    }
-    public void printReceipt(SaleDTO saleInfo) {
-
     }
 }

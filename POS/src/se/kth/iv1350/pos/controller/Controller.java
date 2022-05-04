@@ -69,6 +69,9 @@ public class Controller {
         System.out.printf("VAT: %-1.2f:-%n", sale.getTotalVatPrice());
     }
 
+    /**
+     * Displays the total price of the sale.
+     */
     public void displayTotal() {
         System.out.printf("Total: %-1.2f:-%n", sale.getTotalPrice());
     }
@@ -95,7 +98,12 @@ public class Controller {
         }
     }
 
-    public void initializePaymentAndEndSale(double amountPaid) {
+    /**
+     * Ends the sale. Calls the method to update the external accounting system and retrieves the sale information
+     * from {@link Sale}.
+     * @param amountPaid Is the amount paid by the customer.
+     */
+    public void endSaleWithPayment(double amountPaid) {
         double change = register.registerPayment(amountPaid, sale.getTotalPrice());
         saleInfo = sale.endSale(amountPaid, change);
         updateExternalSystems(saleInfo);
@@ -120,6 +128,10 @@ public class Controller {
     public double getRegisterBalance() {
         return  register.getCurrentBalance();
     }
+
+    /**
+     * Passes on the request of creating a physical receipt.
+     */
     public void getReceipt() {
         printer.printReceipt(this.saleInfo);
     }
