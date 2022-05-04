@@ -144,7 +144,10 @@ public class Sale {
      * @return
      */
     public SaleDTO endSale(double amountPaid, double change) {
-        saleInfo = new SaleDTO(this.basket, runningTotalPrice, totalVatPrice, totalPrice, amountPaid, change);
+        this.saleInfo = new SaleDTO(this.basket, runningTotalPrice, totalVatPrice, totalPrice, amountPaid, change);
         return saleInfo;
+    }
+    public void printReceipt(SaleDTO saleInfo) {
+
     }
 }

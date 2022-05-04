@@ -15,6 +15,7 @@ public class Controller {
     private Sale sale;
     private Register register;
     private SaleDTO saleInfo;
+    private Printer printer;
 
     /**
      * Creates an instance of the controller that is going to be used to access other layers. This is only done once.
@@ -27,6 +28,7 @@ public class Controller {
         this.exAccountingSystem = externalSystems.getExAccountingSystem();
         this.memberDB = externalSystems.getMemberDatabase();
         this.register = new Register(1000);
+        this.printer = new Printer();
     }
 
     /**
@@ -111,7 +113,14 @@ public class Controller {
         return saleInfo.getChange();
     }
 
+    /**
+     * Retrieves the register balance.
+     * @return The amount currently stored in the register.
+     */
     public double getRegisterBalance() {
         return  register.getCurrentBalance();
+    }
+    public void getReceipt() {
+        printer.printReceipt(this.saleInfo);
     }
 }

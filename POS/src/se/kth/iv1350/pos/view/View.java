@@ -29,12 +29,12 @@ public class View {
      */
     public void simulateOneSale() {
         ctrl.initializeNewSale();
-        ctrl.scanAndAddNewItemFromInventoryToSale(3006,1);
+        ctrl.scanAndAddNewItemFromInventoryToSale(3006, 1);
         ctrl.scanAndAddNewItemFromInventoryToSale(6880, 3);
         ctrl.scanAndAddNewItemFromInventoryToSale(4680, 1);
-        ctrl.scanAndAddNewItemFromInventoryToSale(3006,1);
-        ctrl.scanAndAddNewItemFromInventoryToSale(2222,1);
-        ctrl.scanAndAddNewItemFromInventoryToSale(1111,5);
+        ctrl.scanAndAddNewItemFromInventoryToSale(3006, 1);
+        ctrl.scanAndAddNewItemFromInventoryToSale(2222, 1);
+        ctrl.scanAndAddNewItemFromInventoryToSale(1111, 5);
         ctrl.scanAndAddNewItemFromInventoryToSale(94011, 1);
         System.out.println();
         System.out.println("\t\t New sale started");
@@ -43,7 +43,12 @@ public class View {
         ctrl.addDiscount(9404075179L);
         ctrl.displayTotal();
         ctrl.initializePaymentAndEndSale(200);
+        System.out.println("Amount paid is: " + 200 + ":-");
         System.out.printf("Change is: %.2f:-%n", ctrl.getChange());
-        System.out.printf("The current balance left in the register is: %.2f:-", ctrl.getRegisterBalance());
+        System.out.printf("The current balance left in the register is: %.2f:-%n", ctrl.getRegisterBalance());
+        ctrl.getReceipt();
+        System.out.println("------------------------------------------------------");
+        System.out.println("\t\t Sale has ended");
+        System.out.println("------------------------------------------------------");
     }
 }

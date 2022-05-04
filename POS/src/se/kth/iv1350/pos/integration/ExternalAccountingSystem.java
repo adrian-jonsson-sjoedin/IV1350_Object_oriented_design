@@ -3,9 +3,8 @@ package se.kth.iv1350.pos.integration;
 import se.kth.iv1350.pos.model.SaleDTO;
 
 /**
- * This class represent the accounting system. It is not implemented as it is
- * not needed for showing the functionality of the POS as accounting is not
- * relevant for the user.
+ * This class represent the accounting system. It is not implemented as it is not needed for showing
+ * the functionality of the POS as accounting is not relevant for the user.
  */
 public class ExternalAccountingSystem {
     /**
