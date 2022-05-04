@@ -71,7 +71,10 @@ public class Sale {
         }
     }
 
-    public void addDiscount(long personalNr) {
+    /**
+     * This method applies a discount to sale
+     */
+    public void addDiscount() {
         this.discountApplied = true;
         this.discount = new Discount(this.basket);
         this.totalDiscount = discount.buyThreeOrMoreGetOneFree() +
@@ -109,7 +112,7 @@ public class Sale {
         updateTotalVat();
         if (this.discountApplied) {
             this.totalPrice = this.runningTotalPrice + this.totalVatPrice - this.totalDiscount;
-        }else{
+        } else {
             this.totalPrice = this.runningTotalPrice + this.totalVatPrice;
         }
     }

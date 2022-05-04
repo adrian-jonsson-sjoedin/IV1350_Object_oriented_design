@@ -2,6 +2,7 @@ package se.kth.iv1350.pos.controller;
 
 import se.kth.iv1350.pos.integration.*;
 import se.kth.iv1350.pos.model.ItemInBasket;
+import se.kth.iv1350.pos.model.Register;
 import se.kth.iv1350.pos.model.Sale;
 
 import java.util.List;
@@ -11,6 +12,7 @@ public class Controller {
     private ExternalAccountingSystem exAccountingSystem;
     private MemberDatabase memberDB;
     private Sale sale;
+    private Register register;
 
     /**
      * Creates an instance of the controller that is going to be used to access other layers. This is only done once.
@@ -22,6 +24,7 @@ public class Controller {
         this.exInventorySystem = externalSystems.getExInventorySystem();
         this.exAccountingSystem = externalSystems.getExAccountingSystem();
         this.memberDB = externalSystems.getMemberDatabase();
+        this.register = new Register(1000);
     }
 
     /**
@@ -73,6 +76,11 @@ public class Controller {
     }
 
     public void addDiscount(long personalNr) {
-        sale.addDiscount(9404075179L);
+        if (memberDB.customerIsMember(2001011111L)) {
+            sale.addDiscount();
+            System.out.println(">>> Discount applied");
+        }else{
+            System.out.println(">>> Customer is not a member");
+        }
     }
 }
