@@ -29,7 +29,7 @@ public class ExternalSystemsCreator {
      * Retrieves CustomerDatabase
      * @return The value of memberDB
      */
-    public MemberDatabase getMemberDB() {
+    public MemberDatabase getMemberDatabase() {
         return memberDB;
     }
 }

@@ -9,7 +9,7 @@ import java.util.List;
 public class Controller {
     private ExternalInventorySystem exInventorySystem;
     private ExternalAccountingSystem exAccountingSystem;
-    private MemberDatabase membertDB;
+    private MemberDatabase memberDB;
     private Sale sale;
 
     /**
@@ -21,7 +21,7 @@ public class Controller {
     public Controller(ExternalSystemsCreator externalSystems, Printer printer) {
         this.exInventorySystem = externalSystems.getExInventorySystem();
         this.exAccountingSystem = externalSystems.getExAccountingSystem();
-        this.membertDB = externalSystems.getMemberDB();
+        this.memberDB = externalSystems.getMemberDatabase();
     }
 
     /**
@@ -55,7 +55,7 @@ public class Controller {
     public void displayCurrentSaleInfo() {
         List<ItemInBasket> currentBasket = sale.getBasket();
         for (ItemInBasket itemInBasket : currentBasket) {
-            printString(itemInBasket);
+            printToString(itemInBasket);
         }
         System.out.println("------------------------------------------------------");
         System.out.printf("Price: %-1.2f:-%n", sale.getRunningTotalPrice());
@@ -64,7 +64,7 @@ public class Controller {
     }
 
 
-    private void printString(ItemInBasket item) {
+    private void printToString(ItemInBasket item) {
         String itemName = item.getItemName();
         double itemPrice = item.getItemPrice();
         int itemQuantity = item.getQuantity();
@@ -72,4 +72,7 @@ public class Controller {
         System.out.println();
     }
 
+    public void addDiscountToSale(int personalNr) {
+
+    }
 }

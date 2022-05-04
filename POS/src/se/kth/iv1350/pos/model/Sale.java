@@ -68,6 +68,10 @@ public class Sale {
         }
     }
 
+    public void addDiscount(int personalNr) {
+
+    }
+
     /**
      * This method will update the field runningTotalPrice which is the price of all items in the basket without the
      * VAT added
