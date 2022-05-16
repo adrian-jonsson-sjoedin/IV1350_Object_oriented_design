@@ -55,7 +55,12 @@ public class View {
         System.out.printf("Price: %-1.2f:-%n", ctrl.getRunningTotal());
         System.out.printf("VAT: %-1.2f:-%n", ctrl.getTotalVat());
 
-        ctrl.addDiscount(9404075179L);
+        if (ctrl.addDiscount(9404075179L)) {
+            System.out.println(">>> Discount added");
+        }else{
+            System.out.println(">>> Not a member.");
+        }
+
         System.out.printf("Total: %-1.2f:-%n", ctrl.getTotal());
         ctrl.endSaleWithPayment(200);
         System.out.println("Amount paid is: " + 200 + ":-");
@@ -69,13 +74,10 @@ public class View {
     }
 
     private void displayCurrentBasket(List<ItemInBasket> currentBasket) {
-
         for (ItemInBasket itemInBasket : currentBasket) {
             printToString(itemInBasket);
         }
-        // System.out.println("------------------------------------------------------");
-        //   System.out.printf("Price: %-1.2f:-%n", ctrl.getRunningTotal());
-        // System.out.printf("VAT: %-1.2f:-%n", ctrl.getTotalVat());
+
     }
 
     private void printToString(ItemInBasket item) {

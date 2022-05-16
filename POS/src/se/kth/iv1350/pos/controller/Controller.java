@@ -94,13 +94,12 @@ public class Controller {
      *
      * @param personalNr Identifier used  to check for eligibility.
      */
-    public void addDiscount(long personalNr) {
+    public boolean addDiscount(long personalNr) {
         if (memberDB.customerIsMember(2001011111L)) {
             sale.addDiscount();
-            System.out.println(">>> Discount applied");
-        } else {
-            System.out.println(">>> Customer is not a member");
+            return true;
         }
+        return false;
     }
 
     /**
