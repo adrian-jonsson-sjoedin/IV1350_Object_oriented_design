@@ -1,10 +1,7 @@
 package se.kth.iv1350.pos.controller;
 
 import se.kth.iv1350.pos.integration.*;
-import se.kth.iv1350.pos.model.ItemInBasket;
-import se.kth.iv1350.pos.model.Register;
-import se.kth.iv1350.pos.model.Sale;
-import se.kth.iv1350.pos.model.SaleDTO;
+import se.kth.iv1350.pos.model.*;
 
 import java.util.List;
 
@@ -45,44 +42,52 @@ public class Controller {
      *
      * @param eanCode  The item's unique identifier.
      * @param quantity How many of this item that should be added.
+     * @return An object specifying if the item got added and the EAN code of said item.
      */
-    public void scanAndAddNewItemFromInventoryToSale(int eanCode, int quantity) {
+    public ScannedItemDTO scanAndAddNewItemFromInventoryToSale(int eanCode, int quantity) {
         if (exInventorySystem.checkIfItemExists(eanCode)) {
             sale.addItemToBasket(exInventorySystem.retrieveItem(eanCode), quantity);
-        } else {
-            System.out.println();
-            System.out.println("Invalid EAN code: " + eanCode);
+            return new ScannedItemDTO(true, eanCode);
         }
+        return new ScannedItemDTO(false, eanCode);
     }
 
     /**
      * This method displays all relevant information about the current sale to
      * the customer when called from view.
      */
-    public void displayCurrentSaleInfo() {
-        List<ItemInBasket> currentBasket = sale.getBasket();
-        for (ItemInBasket itemInBasket : currentBasket) {
-            printToString(itemInBasket);
-        }
-        System.out.println("------------------------------------------------------");
-        System.out.printf("Price: %-1.2f:-%n", sale.getRunningTotalPrice());
-        System.out.printf("VAT: %-1.2f:-%n", sale.getTotalVatPrice());
+    public List<ItemInBasket> getCurrentBasket() {
+        return sale.getBasket();
     }
 
     /**
-     * Displays the total price of the sale.
+     * Gets the total price of the sale from <code>Sale</code>.
+     *
+     * @return The total price.
      */
-    public void displayTotal() {
-        System.out.printf("Total: %-1.2f:-%n", sale.getTotalPrice());
+    public double getTotal() {
+        return sale.getTotalPrice();
+
     }
 
-    private void printToString(ItemInBasket item) {
-        String itemName = item.getItemName();
-        double itemPrice = item.getItemPrice();
-        int itemQuantity = item.getQuantity();
-        System.out.printf("%-20s %1d * %1.2f:- %n ", itemName, itemQuantity, itemPrice);
-        System.out.println();
+    /**
+     * Gets the total running price of the sale from <code>Sale</code>.
+     *
+     * @return The total running price (without VAT added) of the current sale.
+     */
+    public double getRunningTotal() {
+        return sale.getRunningTotalPrice();
     }
+
+    /**
+     * Gets the total running VAT price of the sale from <code>Sale</code>
+     *
+     * @return The total VAT price of the current sale.
+     */
+    public double getTotalVat() {
+        return sale.getTotalVatPrice();
+    }
+
 
     /**
      * Adds discount to purchase if customer is eligible.
@@ -101,6 +106,7 @@ public class Controller {
     /**
      * Ends the sale. Calls the method to update the external accounting system and retrieves the sale information
      * from {@link Sale}.
+     *
      * @param amountPaid Is the amount paid by the customer.
      */
     public void endSaleWithPayment(double amountPaid) {
@@ -115,6 +121,7 @@ public class Controller {
 
     /**
      * Getter to retrieve the change from SaleInfo
+     *
      * @return the change for the customer
      */
     public double getChange() {
@@ -123,10 +130,11 @@ public class Controller {
 
     /**
      * Retrieves the register balance.
+     *
      * @return The amount currently stored in the register.
      */
     public double getRegisterBalance() {
-        return  register.getCurrentBalance();
+        return register.getCurrentBalance();
     }
 
     /**
