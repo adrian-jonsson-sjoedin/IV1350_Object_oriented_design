@@ -9,16 +9,26 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.logging.Logger;
 
+/**
+ * This class prints the total revenue generated over multiple sales to a text file
+ */
 public class TotalRevenueFileOutput implements SaleObserver {
     private static final String FILE_NAME = "Revenue_log.txt";
     private PrintWriter fileOutput;
     private double total;
 
+    /**
+     * Creates a new instance. This should only be done once.
+     */
     public TotalRevenueFileOutput() {
         total = 0d;
     }
 
-
+    /**
+     * Updates the total revenue and prints it to a text file
+     *
+     * @param amountPaid the amount to add to the total revenue.
+     */
     @Override
     public void totalRevenue(double amountPaid) {
         total += amountPaid;

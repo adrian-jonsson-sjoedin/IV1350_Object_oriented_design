@@ -6,6 +6,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * This class tests that the InvalidEanCodeException class works asa intended.
+ */
 class InvalidEanCodeExceptionTest {
     ExternalInventorySystem inventory;
 
@@ -16,7 +19,7 @@ class InvalidEanCodeExceptionTest {
 
     @AfterEach
     void tearDown() {
-        inventory= null;
+        inventory = null;
     }
 
     @Test

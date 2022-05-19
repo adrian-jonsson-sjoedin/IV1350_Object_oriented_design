@@ -37,6 +37,7 @@ public class Controller {
     /**
      * Starts a new sale and creates an instance of Sale. This method must be called first before doing anything else
      * during a sale.
+     * Also passes the observers so Sale.
      */
     public void initializeNewSale() {
         this.sale = new Sale();
@@ -152,6 +153,10 @@ public class Controller {
         printer.printReceipt(this.saleInfo);
     }
 
+    /**
+     * adds an observer to the List of SaleObservers
+     * @param observer The observer to be added
+     */
     public void addObserver(SaleObserver observer) {
         this.observers.add(observer);
     }
