@@ -49,7 +49,6 @@ public class Controller {
      *
      * @param eanCode  The item's unique identifier.
      * @param quantity How many of this item that should be added.
-     * @return An object specifying if the item got added and the EAN code of said item.
      */
     public void scanAndAddNewItemFromInventoryToSale(int eanCode, int quantity)
             throws InvalidEanCodeException, OperationFailedException {

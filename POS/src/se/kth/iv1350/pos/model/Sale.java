@@ -126,8 +126,8 @@ public class Sale {
 
     /**
      * @param amountPaid What the customer paid
-     * @param change     The change tey received
-     * @return
+     * @param change     The change they received
+     * @return {@link SaleDTO}
      */
     public SaleDTO endSale(double amountPaid, double change) {
         this.saleInfo = new SaleDTO(this.basket, runningTotalPrice, totalVatPrice, totalPrice, amountPaid, change);
@@ -152,10 +152,10 @@ public class Sale {
 
     /**
      * Adds an observer to the observer list.
-     * @param observers The observer to be added.
+     * @param observer The observer to be added.
      */
-    public void addObservers(List<SaleObserver> observers) {
-        this.observers.addAll(observers);
+    public void addObservers(List<SaleObserver> observer) {
+        this.observers.addAll(observer);
     }
 
     private void notifyObservers() {

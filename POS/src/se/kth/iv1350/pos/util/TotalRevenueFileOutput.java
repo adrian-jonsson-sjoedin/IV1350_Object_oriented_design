@@ -12,19 +12,19 @@ import java.util.logging.Logger;
 public class TotalRevenueFileOutput implements SaleObserver {
     private static final String FILE_NAME = "Revenue_log.txt";
     private PrintWriter fileOutput;
-    private double totalRevenue;
+    private double total;
 
     public TotalRevenueFileOutput() {
-        this.totalRevenue = 0d;
+        total = 0d;
     }
 
 
     @Override
     public void totalRevenue(double amountPaid) {
+        total += amountPaid;
         try {
-            this.totalRevenue += amountPaid;
-            printToFile(amountPaid);
-        }catch (IOException ex){
+            printToFile(total);
+        } catch (IOException ex) {
             Logger.getLogger(TotalRevenueFileOutput.class.getName());
         }
     }
