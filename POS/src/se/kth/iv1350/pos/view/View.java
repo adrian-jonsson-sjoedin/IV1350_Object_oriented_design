@@ -7,6 +7,7 @@ import se.kth.iv1350.pos.integration.InventoryDBUnresponsiveException;
 import se.kth.iv1350.pos.integration.Printer;
 import se.kth.iv1350.pos.model.ItemInBasket;
 import se.kth.iv1350.pos.model.ScannedItemDTO;
+import se.kth.iv1350.pos.util.TotalRevenueFileOutput;
 
 import java.io.IOException;
 import java.util.List;
@@ -32,6 +33,8 @@ public class View {
         this.ctrl = ctrl;
         this.printer = printer;
         this.errorMessageHandler = new ErrorMessageHandler();
+        ctrl.addObserver(new TotalRevenueView());
+        ctrl.addObserver(new TotalRevenueFileOutput());
     }
 
     /**
@@ -42,7 +45,6 @@ public class View {
         System.out.println();
         System.out.println("\t\t New sale started");
         System.out.println("------------------------------------------------------");
-
         addItem(3006, 1);
         addItem(6880, 3);
         addItem(4680, 1);
@@ -54,7 +56,6 @@ public class View {
 
         // simulated db failure
         addItem(6969, 1);
-
 
         List<ItemInBasket> currentBasket = ctrl.getCurrentBasket();
         displayCurrentBasket(currentBasket);
@@ -108,6 +109,9 @@ public class View {
         System.out.println();
     }
 
+    /**
+     * DEPRECATED for seminar 4
+     */
     private void displayInvalidItem(List<ScannedItemDTO> basket) {
         for (ScannedItemDTO itemInBasket : basket) {
             if (!itemInBasket.isAdded()) {

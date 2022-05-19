@@ -1,9 +1,18 @@
-19 maj 2022 16:29:42, Exception was thrown: <Inventory database unreachable>
+19 maj 2022 19:16:45, Exception was thrown: <Inventory database unreachable>
 se.kth.iv1350.pos.integration.InventoryDBUnresponsiveException: Inventory database unreachable
 	at se.kth.iv1350.pos.integration.ExternalInventorySystem.retrieveItem(ExternalInventorySystem.java:52)
-	at se.kth.iv1350.pos.controller.Controller.scanAndAddNewItemFromInventoryToSale(Controller.java:54)
-	at se.kth.iv1350.pos.view.View.addItem(View.java:90)
-	at se.kth.iv1350.pos.view.View.simulateOneSale(View.java:56)
+	at se.kth.iv1350.pos.controller.Controller.scanAndAddNewItemFromInventoryToSale(Controller.java:57)
+	at se.kth.iv1350.pos.view.View.addItem(View.java:91)
+	at se.kth.iv1350.pos.view.View.simulateOneSale(View.java:58)
 	at se.kth.iv1350.pos.startup.Main.main(Main.java:32)
+
+
+19 maj 2022 19:16:46, Exception was thrown: <Inventory database unreachable>
+se.kth.iv1350.pos.integration.InventoryDBUnresponsiveException: Inventory database unreachable
+	at se.kth.iv1350.pos.integration.ExternalInventorySystem.retrieveItem(ExternalInventorySystem.java:52)
+	at se.kth.iv1350.pos.controller.Controller.scanAndAddNewItemFromInventoryToSale(Controller.java:57)
+	at se.kth.iv1350.pos.view.View.addItem(View.java:91)
+	at se.kth.iv1350.pos.view.View.simulateOneSale(View.java:58)
+	at se.kth.iv1350.pos.startup.Main.main(Main.java:33)
 
 

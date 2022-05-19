@@ -19,6 +19,7 @@ public class Sale {
     private boolean discountApplied = false;
     private double totalDiscount;
     private SaleDTO saleInfo;
+    private List<SaleObserver> observers = new ArrayList<>();
 
     /**
      * Creates an instance of sale.
@@ -130,6 +131,7 @@ public class Sale {
      */
     public SaleDTO endSale(double amountPaid, double change) {
         this.saleInfo = new SaleDTO(this.basket, runningTotalPrice, totalVatPrice, totalPrice, amountPaid, change);
+        notifyObservers();
         return saleInfo;
     }
 
@@ -146,5 +148,19 @@ public class Sale {
     public double getTotalPrice() {
         calculateTotalPrice();
         return totalPrice;
+    }
+
+    /**
+     * Adds an observer to the observer list.
+     * @param observers The observer to be added.
+     */
+    public void addObservers(List<SaleObserver> observers) {
+        this.observers.addAll(observers);
+    }
+
+    private void notifyObservers() {
+        for (SaleObserver observer : this.observers) {
+            observer.totalRevenue(getTotalPrice());
+        }
     }
 }

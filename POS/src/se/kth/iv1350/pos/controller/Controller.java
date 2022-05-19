@@ -5,6 +5,7 @@ import se.kth.iv1350.pos.model.*;
 import se.kth.iv1350.pos.util.LogHandler;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Controller {
@@ -16,6 +17,7 @@ public class Controller {
     private SaleDTO saleInfo;
     private Printer printer;
     private LogHandler log;
+    private List<SaleObserver> observers = new ArrayList<>();
 
     /**
      * Creates an instance of the controller that is going to be used to access other layers. This is only done once.
@@ -38,6 +40,7 @@ public class Controller {
      */
     public void initializeNewSale() {
         this.sale = new Sale();
+        sale.addObservers(this.observers);
     }
 
     /**
@@ -148,5 +151,9 @@ public class Controller {
      */
     public void getReceipt() {
         printer.printReceipt(this.saleInfo);
+    }
+
+    public void addObserver(SaleObserver observer) {
+        this.observers.add(observer);
     }
 }

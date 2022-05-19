@@ -30,6 +30,7 @@ public class Main {
             Controller ctrl = new Controller(externalSystems, printer);
             View view = new View(ctrl, printer);
             view.simulateOneSale();
+            view.simulateOneSale();
         }catch (IOException ex){
             System.out.println("The process failed to run");
             ex.printStackTrace();
