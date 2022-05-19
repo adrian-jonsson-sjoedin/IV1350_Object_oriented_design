@@ -22,6 +22,8 @@ public class ExternalInventorySystem {
     }
 
     /**
+     * DEPRECATED for seminar 4 since exception handling is introduced
+     * <p>
      * This method takes an eanCode and checks if an item with that eanCode is already in the inventory.
      *
      * @param eanCode Used to search for the item in the list.
@@ -41,18 +43,19 @@ public class ExternalInventorySystem {
      *
      * @param eanCode Identifies which item that should be retrieved.
      * @return Returns a reference to that item.
+     * @throws InvalidEanCodeException for any EAN codes that is not in the inventory.
      */
-    public ItemDTO retrieveItem(int eanCode) {
+    public ItemDTO retrieveItem(int eanCode) throws InvalidEanCodeException {
         ItemDTO itemToRetrieve;
-        if (checkIfItemExists(eanCode)) {
-            for (ItemDTO itemDTO : inventory) {
-                if (itemDTO.getEanCode() == eanCode) {
-                    itemToRetrieve = itemDTO;
-                    return itemToRetrieve;
-                }
+        //if (checkIfItemExists(eanCode)) {
+        for (ItemDTO itemDTO : inventory) {
+            if (itemDTO.getEanCode() == eanCode) {
+                itemToRetrieve = itemDTO;
+                return itemToRetrieve;
             }
         }
-        return null;
+        //}
+        throw new InvalidEanCodeException(eanCode);
     }
 
     public List<ItemDTO> getInventory() {

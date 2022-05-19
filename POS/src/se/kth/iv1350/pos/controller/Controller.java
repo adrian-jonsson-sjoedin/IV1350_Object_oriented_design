@@ -3,6 +3,7 @@ package se.kth.iv1350.pos.controller;
 import se.kth.iv1350.pos.integration.*;
 import se.kth.iv1350.pos.model.*;
 
+import java.io.IOException;
 import java.util.List;
 
 public class Controller {
@@ -20,7 +21,7 @@ public class Controller {
      * @param externalSystems Handles the integration of the external systems that controller need access to.
      * @param printer         The printer class that is going to be used to simulate printing a receipt.
      */
-    public Controller(ExternalSystemsCreator externalSystems, Printer printer) {
+    public Controller(ExternalSystemsCreator externalSystems, Printer printer) throws IOException {
         this.exInventorySystem = externalSystems.getExInventorySystem();
         this.exAccountingSystem = externalSystems.getExAccountingSystem();
         this.memberDB = externalSystems.getMemberDatabase();
@@ -44,12 +45,17 @@ public class Controller {
      * @param quantity How many of this item that should be added.
      * @return An object specifying if the item got added and the EAN code of said item.
      */
-    public ScannedItemDTO scanAndAddNewItemFromInventoryToSale(int eanCode, int quantity) {
-        if (exInventorySystem.checkIfItemExists(eanCode)) {
+    public void scanAndAddNewItemFromInventoryToSale(int eanCode, int quantity)
+            throws InvalidEanCodeException, OperationFailedException {
+        try{
+        //if (exInventorySystem.checkIfItemExists(eanCode)) {
             sale.addItemToBasket(exInventorySystem.retrieveItem(eanCode), quantity);
-            return new ScannedItemDTO(true, eanCode);
+        //    return new ScannedItemDTO(true, eanCode);
+     //   }
+       // return new ScannedItemDTO(false, eanCode);
+    }catch (InvalidEanCodeException ex){
+            throw new OperationFailedException("Could not register the item ", ex);
         }
-        return new ScannedItemDTO(false, eanCode);
     }
 
     /**
