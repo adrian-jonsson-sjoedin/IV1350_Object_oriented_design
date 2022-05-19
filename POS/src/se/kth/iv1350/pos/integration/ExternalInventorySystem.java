@@ -43,18 +43,20 @@ public class ExternalInventorySystem {
      *
      * @param eanCode Identifies which item that should be retrieved.
      * @return Returns a reference to that item.
-     * @throws InvalidEanCodeException for any EAN codes that is not in the inventory.
+     * @throws InvalidEanCodeException for any EAN codes that is not in the inventory. Is checked
+     * @throws InventoryDBUnresponsiveException for simulated database error. Is unchecked
      */
-    public ItemDTO retrieveItem(int eanCode) throws InvalidEanCodeException {
+    public ItemDTO retrieveItem(int eanCode) throws InvalidEanCodeException, InventoryDBUnresponsiveException {
         ItemDTO itemToRetrieve;
-        //if (checkIfItemExists(eanCode)) {
+        if(eanCode == 6969){
+            throw new InventoryDBUnresponsiveException("Inventory database unreachable");
+        }
         for (ItemDTO itemDTO : inventory) {
             if (itemDTO.getEanCode() == eanCode) {
                 itemToRetrieve = itemDTO;
                 return itemToRetrieve;
             }
         }
-        //}
         throw new InvalidEanCodeException(eanCode);
     }
 

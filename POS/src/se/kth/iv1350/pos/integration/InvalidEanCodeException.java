@@ -3,7 +3,7 @@ package se.kth.iv1350.pos.integration;
 /**
  * This class handles errors regarding invalid EAN code.
  */
-public class InvalidEanCodeException extends Exception{
+public class InvalidEanCodeException extends Exception {
     private final int invalidEanCode;
 
     /**

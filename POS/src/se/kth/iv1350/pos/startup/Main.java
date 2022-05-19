@@ -1,8 +1,10 @@
 package se.kth.iv1350.pos.startup;
 
 import se.kth.iv1350.pos.controller.Controller;
+import se.kth.iv1350.pos.controller.OperationFailedException;
 import se.kth.iv1350.pos.integration.ExternalSystemsCreator;
 import se.kth.iv1350.pos.integration.InvalidEanCodeException;
+import se.kth.iv1350.pos.integration.InventoryDBUnresponsiveException;
 import se.kth.iv1350.pos.integration.Printer;
 import se.kth.iv1350.pos.view.View;
 
@@ -20,7 +22,8 @@ public class Main {
      *
      * @param args Does not require any parameters or command line inputs.
      */
-    public static void main(String[] args) throws InvalidEanCodeException, IOException {
+    public static void main(String[] args) throws InvalidEanCodeException, InventoryDBUnresponsiveException,
+            OperationFailedException, IOException {
         try {
             ExternalSystemsCreator externalSystems = new ExternalSystemsCreator();
             Printer printer = new Printer();

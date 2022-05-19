@@ -3,6 +3,7 @@ package se.kth.iv1350.pos.view;
 import se.kth.iv1350.pos.controller.Controller;
 import se.kth.iv1350.pos.controller.OperationFailedException;
 import se.kth.iv1350.pos.integration.InvalidEanCodeException;
+import se.kth.iv1350.pos.integration.InventoryDBUnresponsiveException;
 import se.kth.iv1350.pos.integration.Printer;
 import se.kth.iv1350.pos.model.ItemInBasket;
 import se.kth.iv1350.pos.model.ScannedItemDTO;
@@ -36,24 +37,24 @@ public class View {
     /**
      * Simulates a sale from start from finish be calling all systems operations in controller
      */
-    public void simulateOneSale() throws InvalidEanCodeException {
+    public void simulateOneSale() throws InvalidEanCodeException, InventoryDBUnresponsiveException, OperationFailedException {
         ctrl.initializeNewSale();
         System.out.println();
         System.out.println("\t\t New sale started");
         System.out.println("------------------------------------------------------");
-        try {
-            ctrl.scanAndAddNewItemFromInventoryToSale(3006, 1);
-            ctrl.scanAndAddNewItemFromInventoryToSale(6880, 3);
-            ctrl.scanAndAddNewItemFromInventoryToSale(4680, 1);
-            ctrl.scanAndAddNewItemFromInventoryToSale(3006, 1);
-            ctrl.scanAndAddNewItemFromInventoryToSale(2222, 1);
-            ctrl.scanAndAddNewItemFromInventoryToSale(1111, 5);
-            //invalid EAN code
-            ctrl.scanAndAddNewItemFromInventoryToSale(94011, 1);
-        }catch(InvalidEanCodeException | OperationFailedException ex){
-            handleException("Could not register item");
 
-        }
+        addItem(3006, 1);
+        addItem(6880, 3);
+        addItem(4680, 1);
+        addItem(3006, 1);
+        addItem(1111, 5);
+
+        //invalid EAN code
+        addItem(94011, 1);
+
+        // simulated db failure
+        addItem(6969, 1);
+
 
         List<ItemInBasket> currentBasket = ctrl.getCurrentBasket();
         displayCurrentBasket(currentBasket);
@@ -83,6 +84,15 @@ public class View {
     private void handleException(String msg) {
         errorMessageHandler.showErrorMsg(msg);
     }
+
+    private void addItem(int eanCode, int quantity) {
+        try {
+            ctrl.scanAndAddNewItemFromInventoryToSale(eanCode, quantity);
+        } catch (InvalidEanCodeException | OperationFailedException ex) {
+            handleException("Could not register item");
+        }
+    }
+
     private void displayCurrentBasket(List<ItemInBasket> currentBasket) {
         for (ItemInBasket itemInBasket : currentBasket) {
             printToString(itemInBasket);

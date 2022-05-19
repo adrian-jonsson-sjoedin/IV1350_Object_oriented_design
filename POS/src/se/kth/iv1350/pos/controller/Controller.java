@@ -2,6 +2,7 @@ package se.kth.iv1350.pos.controller;
 
 import se.kth.iv1350.pos.integration.*;
 import se.kth.iv1350.pos.model.*;
+import se.kth.iv1350.pos.util.LogHandler;
 
 import java.io.IOException;
 import java.util.List;
@@ -14,6 +15,7 @@ public class Controller {
     private Register register;
     private SaleDTO saleInfo;
     private Printer printer;
+    private LogHandler log;
 
     /**
      * Creates an instance of the controller that is going to be used to access other layers. This is only done once.
@@ -27,6 +29,7 @@ public class Controller {
         this.memberDB = externalSystems.getMemberDatabase();
         this.register = new Register(1000);
         this.printer = new Printer();
+        this.log = new LogHandler();
     }
 
     /**
@@ -47,13 +50,11 @@ public class Controller {
      */
     public void scanAndAddNewItemFromInventoryToSale(int eanCode, int quantity)
             throws InvalidEanCodeException, OperationFailedException {
-        try{
-        //if (exInventorySystem.checkIfItemExists(eanCode)) {
-            sale.addItemToBasket(exInventorySystem.retrieveItem(eanCode), quantity);
-        //    return new ScannedItemDTO(true, eanCode);
-     //   }
-       // return new ScannedItemDTO(false, eanCode);
-    }catch (InvalidEanCodeException ex){
+        try {
+            ItemDTO item = exInventorySystem.retrieveItem(eanCode);
+            sale.addItemToBasket(item, quantity);
+        } catch (InventoryDBUnresponsiveException ex) {
+            log.logException(ex);
             throw new OperationFailedException("Could not register the item ", ex);
         }
     }
